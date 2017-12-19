@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Player from './Player/Player'
 
 class App extends Component {
   constructor(props) {
@@ -19,12 +19,20 @@ class App extends Component {
   }
 
   render() {
-
     if (!this.state.playerData) {
       return <p>Loading Players...</p>
+
     } else {
+
+      const listOfPlayers = this.state.playerData.map( (player) => {
+        return <Player name= {player.name}
+          key={player.id}/>;
+      });
+
       return (
-        <p>{this.state.playerData[0].name}</p>
+        <ul>
+          {listOfPlayers}
+        </ul>
       );
     }
   }
