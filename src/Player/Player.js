@@ -5,6 +5,8 @@ const Player = (props) => {
   return(
     <div className='playerSheet'>
     <p onClick={props.click} >{props.name}</p>
+    <p> {props.hp} </p>
+    <p> {props.strength} </p>
     </div>
   )
 }

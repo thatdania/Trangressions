@@ -38,13 +38,28 @@ class App extends Component {
         return <Player name= {player.name}
           click={() => this.togglePlayerHandler(player)}
           key={player.id}/>;
-
       });
+
+      const PlayersChosen = [this.state.FirstPlayer, this.state.SecondPlayer]
+
+      const SelectedPlayers = PlayersChosen.map( player => {
+        if(this.state.FirstPlayer instanceof Array) { return <Player name= {"Select Player"}/> } else {
+        return <Player name= {player.name}
+        hp =  {"Health: " + player.hp}
+        strength = {"Strength: " + player.strength}
+        key={player.strength}/>;
+      }
+      });
+
+
+
 
       return (
         <ul>
           {listOfPlayers}
-          {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
+           {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
+
+          {SelectedPlayers}
         </ul>
       );
     }
