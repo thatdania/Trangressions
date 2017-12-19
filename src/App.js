@@ -44,9 +44,7 @@ class App extends Component {
       return (
         <ul>
           {listOfPlayers}
-          {this.state.FirstPlayer.name}
-           Vs 
-          {this.state.SecondPlayer.name}
+          {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
         </ul>
       );
     }
