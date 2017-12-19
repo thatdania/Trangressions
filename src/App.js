@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import { Api } from './Api'
 
 class Player extends Component {
   constructor(props){
@@ -34,6 +35,9 @@ class Player extends Component {
           <p>Hit Points: {this.state.hp2}</p>
           <button onClick={this.action2}>{this.props.action2}</button>
         </div>
+
+        <Api />
+        
       </span>
     );
   }
