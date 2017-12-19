@@ -5,3 +5,7 @@
   margin: 16px;
   border: 1px solid black;
 }
+
+.playerSheet:hover {
+  background-color: rgb(40, 138, 156);
+}

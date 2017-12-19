@@ -3,9 +3,19 @@ import './App.css';
 import Player from './Player/Player'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
+ state = {
+      FirstPlayer: [],
+      SecondPlayer: []
+    }
+
+  togglePlayerHandler = (player) => {
+    if (this.state.FirstPlayer instanceof Array){
+      console.log(player)
+      this.setState({FirstPlayer: player})}
+    else if (this.state.SecondPlayer instanceof Array){
+      console.log(player)
+      this.setState({SecondPlayer: player})
+    }
   }
 
   componentDidMount() {
@@ -26,12 +36,17 @@ class App extends Component {
 
       const listOfPlayers = this.state.playerData.map( (player) => {
         return <Player name= {player.name}
+          click={() => this.togglePlayerHandler(player)}
           key={player.id}/>;
+
       });
 
       return (
         <ul>
           {listOfPlayers}
+          {this.state.FirstPlayer.name}
+           Vs 
+          {this.state.SecondPlayer.name}
         </ul>
       );
     }
