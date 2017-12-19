@@ -3,18 +3,30 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:4000/api/players/players.json')
+      .then(d => d.json())
+      .then(d => {
+        this.setState({
+          playerData: d
+        })
+      })
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+
+    if (!this.state.playerData) {
+      return <p>Loading Players...</p>
+    } else {
+      return (
+        <p>{this.state.playerData[0].name}</p>
+      );
+    }
   }
 }
 
