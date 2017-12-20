@@ -1,45 +1,68 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
-import { Api } from './Api'
+import Player from './Player/Player'
 
-class Player extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      hp1: this.props.hp1,
-      hp2: this.props.hp2
-    };
-    this.action1 = this.action1.bind(this);
-    this.action2 = this.action2.bind(this);
+class App extends Component {
+ state = {
+      FirstPlayer: [],
+      SecondPlayer: []
+    }
+
+  togglePlayerHandler = (player) => {
+    if (this.state.FirstPlayer instanceof Array){
+      console.log(player)
+      this.setState({FirstPlayer: player})}
+    else if (this.state.SecondPlayer instanceof Array){
+      console.log(player)
+      this.setState({SecondPlayer: player})
+    }
   }
 
-  action1() {
-     this.setState({hp2: this.state.hp2 - 10});
-  }
-
-  action2() {
-     this.setState({hp1: this.state.hp1 - 10});
+  componentDidMount() {
+    fetch('http://localhost:4000/api/players/players.json')
+      .then(d => d.json())
+      .then(d => {
+        this.setState({
+          playerData: d
+        })
+      })
   }
 
   render() {
-    return (
-      <span>
-        <div id='player1'>
-          <p>{this.props.name1}</p>
-          <p>Hit Points: {this.state.hp1}</p>
-          <button onClick={this.action1}>{this.props.action1}</button>
-        </div>
-        <div id='player2'>
-          <p>{this.props.name2}</p>
-          <p>Hit Points: {this.state.hp2}</p>
-          <button onClick={this.action2}>{this.props.action2}</button>
-        </div>
+    if (!this.state.playerData) {
+      return <p>Loading Players...</p>
 
-        <Api />
-        
-      </span>
-    );
+    } else {
+
+      const listOfPlayers = this.state.playerData.map( (player) => {
+        return <Player name= {player.name}
+          click={() => this.togglePlayerHandler(player)}
+          key={player.id}/>;
+      });
+
+      const PlayersChosen = [this.state.FirstPlayer, this.state.SecondPlayer]
+
+      const SelectedPlayers = PlayersChosen.map( player => {
+        if(this.state.FirstPlayer instanceof Array) { return <Player name= {"Select Player"}/> } else {
+        return <Player name= {player.name}
+        hp =  {"Health: " + player.hp}
+        strength = {"Strength: " + player.strength}
+        key={player.strength}/>;
+      }
+      });
+
+
+
+
+      return (
+        <ul>
+          {listOfPlayers}
+           {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
+
+          {SelectedPlayers}
+        </ul>
+      );
+    }
   }
 }
 
