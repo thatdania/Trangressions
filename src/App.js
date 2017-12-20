@@ -3,6 +3,7 @@ import './App.css';
 import Player from './Player/Player'
 import Battle from './Battle'
 import renderIf from './RenderIf';
+import ToggleDisplay from 'react-toggle-display';
 
 class App extends Component {
 constructor(props){
@@ -12,22 +13,23 @@ constructor(props){
       name: "Select Player",
       hp: "0",
       strength: "0",
+      action1: "",
+      action2: "",
       image: {url: "/uploads/player/goggles.jpg"}
     },
     SecondPlayer: { id: "id2",
       name: "Select Player",
       hp: "0",
       strength: "0",
+      action1: "",
+      action2: "",
       image: {url: "/uploads/player/goggles.jpg"}
     },
     showComponent: false,
-    listPlayers: true,
-    listSelected: true
+    show: true
   }
   this._onButtonClick=  this._onButtonClick.bind(this)
 }
-
-
 
   togglePlayerHandler = (player) => {
     if (this.state.FirstPlayer.name === "Select Player" ){
@@ -50,28 +52,26 @@ constructor(props){
   _onButtonClick(){
     this.setState({
       showComponent: true,
-      listPlayers: false,
-      listSelected: false
+      show: !this.state.show
     });
   }
 
   render() {
     if (!this.state.playerData) {
       return <p>Loading Players...</p>
-
     } else {
-      const listOfPlayers = this.state.playerData.map(player => {
+      const listOfPlayers = this.state.playerData.map( player => {
         return <Player
           name = {player.name}
-         image = {"http://localhost:4000" + player.image.url}
-         click = {() => this.togglePlayerHandler(player)}
-           key = {player.id}
+          image = {"http://localhost:4000" + player.image.url}
+          click = {() => this.togglePlayerHandler(player)}
+          key = {player.id}
            />;
       });
 
       const PlayersChosen = [this.state.FirstPlayer, this.state.SecondPlayer]
 
-      const SelectedPlayers = PlayersChosen.map(player => {
+      const SelectedPlayers = PlayersChosen.map( player => {
         return <Player
           name = {player.name}
          image = {"http://localhost:4000" + player.image.url}
@@ -83,14 +83,14 @@ constructor(props){
 
       return (
         <ul>
-        {renderIf(this.state.listPlayers, listOfPlayers)} <br></br>
-      {renderIf(this.state.listSelected, SelectedPlayers)}<br></br>
-
-           {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
-
-
-          <button onClick={this._onButtonClick}> Fight </button>
-            {this.state.showComponent ? <Battle name1={this.state.FirstPlayer.name} hp1={this.state.FirstPlayer.hp} action1={this.state.FirstPlayer.action} name2={this.state.SecondPlayer.name} hp2={this.state.SecondPlayer.hp} action2={this.state.FirstPlayer.action}/> : null}
+          <ToggleDisplay show={this.state.show}>
+            {listOfPlayers} <br></br>
+            {SelectedPlayers}<br></br>
+            {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
+            <button onClick={this._onButtonClick}> Fight </button>
+          </ToggleDisplay>
+          {this.state.showComponent ? <Battle player1={this.state.FirstPlayer}
+            player2={this.state.SecondPlayer}/> : null}
         </ul>
       );
     }
