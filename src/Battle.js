@@ -8,13 +8,12 @@ class Battle extends Component {
   constructor(props){
     super(props);
     this.state = {
-      hp1: this.props.hp1,
-      hp2: this.props.hp2
+      hp1: this.props.player1.hp,
+      hp2: this.props.player2.hp
     };
     this.action1 = this.action1.bind(this);
     this.action2 = this.action2.bind(this);
   }
-
   action1() {
      this.setState({hp2: this.state.hp2 - 10});
   }
@@ -27,14 +26,20 @@ class Battle extends Component {
     return (
       <span>
         <div id='player1'>
-          <p>{this.props.name1}</p>
+          <p>{this.props.player1.name}</p>
           <p>Hit Points: {this.state.hp1}</p>
-          <button onClick={this.action1}>{this.props.action1}</button>
+          <img src={"http://localhost:4000" + this.props.player1.image.url} height="100px" width="100px" />
+          <button onClick={this.action1}>{this.props.player1.actions[0].name}</button>
+          <button onClick={this.action1}>{this.props.player1.actions[1].name}</button>
         </div>
+        <br />
+        <br />
         <div id='player2'>
-          <p>{this.props.name2}</p>
+          <p>{this.props.player2.name}</p>
           <p>Hit Points: {this.state.hp2}</p>
-          <button onClick={this.action2}>{this.props.action2}</button>
+          <img src={"http://localhost:4000" + this.props.player2.image.url} height="100px" width="100px"/>
+          <button onClick={this.action2}>{this.props.player2.actions[0].name}</button>
+          <button onClick={this.action2}>{this.props.player2.actions[1].name}</button>
         </div>
 
 
