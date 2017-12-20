@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Player from './Player/Player'
 import Battle from './Battle'
+import renderIf from './RenderIf';
 
 class App extends Component {
   constructor(props){
@@ -9,7 +10,9 @@ class App extends Component {
     this.state = {
       FirstPlayer: [],
       SecondPlayer: [],
-      showComponent: false
+      showComponent: false,
+      listPlayers: true,
+      listSelected: true
     }
     this._onButtonClick= this._onButtonClick.bind(this);
   }
@@ -35,6 +38,8 @@ class App extends Component {
   _onButtonClick(){
     this.setState({
       showComponent: true,
+      listPlayers: false,
+      listSelected: false
     });
   }
 
@@ -47,7 +52,7 @@ class App extends Component {
           return <Player name= {player.name}
             click={() => this.togglePlayerHandler(player)}
             key={index}/>;
-        });
+    });
 
       const PlayersChosen = [this.state.FirstPlayer, this.state.SecondPlayer];
 
@@ -59,18 +64,18 @@ class App extends Component {
           key={index}/>;
         }
       });
-
-      {console.log(this.state.FirstPlayer.name)}
+      {console.log(this.listOfPlayers)}
 
       return (
         <ul>
-          {listOfPlayers}
+        {renderIf(this.state.listPlayers, listOfPlayers)}
+        {renderIf(this.state.listSelected, SelectedPlayers)}
+
            {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
 
-          {SelectedPlayers}
 
-          <button onClick={this._onButtonClick}>Fight</button>
-            {this.state.showComponent ? <Battle name1={this.state.FirstPlayer.name} hp1={this.state.FirstPlayer.hp} name2={this.state.SecondPlayer.name} hp2={this.state.SecondPlayer.hp} /> : null}
+          <button onClick={this._onButtonClick}> Fight </button>
+            {this.state.showComponent ? <Battle name1={this.state.FirstPlayer.name} hp1={this.state.FirstPlayer.hp} action1={this.state.FirstPlayer.action} name2={this.state.SecondPlayer.name} hp2={this.state.SecondPlayer.hp} action2={this.state.FirstPlayer.action}/> : null}
         </ul>
       );
     }
