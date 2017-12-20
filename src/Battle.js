@@ -18,18 +18,27 @@ class Battle extends Component {
     this.player1SecondaryAttack = this.player1SecondaryAttack.bind(this);
     this.player2SecondaryAttack = this.player2SecondaryAttack.bind(this);
   }
+
+  randomAttack1 (strength) {
+    return Math.floor(((Math.random() * 4) + 6)*(strength/100))
+  }
+
+  randomAttack2 (strength) {
+    return Math.floor(((Math.random() * 4) + 9)*(strength/100))
+  }
+
   player1PrimaryAttack() {
-     this.setState({hp2: this.state.hp2 - (10*(this.state.strength1/100))});
+     this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1)});
   }
   player1SecondaryAttack() {
-     this.setState({hp2: this.state.hp2 - (15*(this.state.strength1/100))});
+     this.setState({hp2: this.state.hp2 - this.randomAttack2(this.state.strength1)});
   }
 
   player2PrimaryAttack() {
-     this.setState({hp1: this.state.hp1 - (10*(this.state.strength2/100))});
+     this.setState({hp1: this.state.hp1 - this.randomAttack1(this.state.strength2)});
   }
   player2SecondaryAttack() {
-     this.setState({hp1: this.state.hp1 - (15*(this.state.strength2/100))});
+     this.setState({hp1: this.state.hp1 - this.randomAttack2(this.state.strength2)});
   }
 
   render() {
