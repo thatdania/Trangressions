@@ -34,7 +34,6 @@ class Player extends Component {
           <button onClick={this.action2}>{this.props.action2}</button>
         </div>
 
-        <Api />
 
       </span>
     );

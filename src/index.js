@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Player from './App';
+import App from './App';
 import Api from './Api';
+
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<h1><App></App></h1>, document.getElementById('root'));

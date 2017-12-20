@@ -66,4 +66,4 @@ class App extends Component {
   }
 }
 
-export default Player;
+export default App;
