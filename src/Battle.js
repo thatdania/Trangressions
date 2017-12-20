@@ -11,7 +11,9 @@ class Battle extends Component {
       hp1: this.props.player1.hp,
       hp2: this.props.player2.hp,
       strength1: this.props.player1.strength,
-      strength2: this.props.player2.strength
+      strength2: this.props.player2.strength,
+      crit1: (200 - this.props.player1.strength)*0.25,
+      crit2: (200 - this.props.player2.strength)*0.25
     };
     this.player1PrimaryAttack = this.player1PrimaryAttack.bind(this);
     this.player2PrimaryAttack = this.player2PrimaryAttack.bind(this);
@@ -19,26 +21,34 @@ class Battle extends Component {
     this.player2SecondaryAttack = this.player2SecondaryAttack.bind(this);
   }
 
-  randomAttack1 (strength) {
-    return Math.floor(((Math.random() * 4) + 6)*(strength/100))
+  randomAttack1(strength , crit){
+    if((Math.random()* 100) < crit){
+      return (Math.floor(((Math.random() * 4) + 6)*(strength/100)))*2
+    } else{
+      return Math.floor(((Math.random() * 4) + 6)*(strength/100))
+    };
   }
 
-  randomAttack2 (strength) {
-    return Math.floor(((Math.random() * 4) + 9)*(strength/100))
+  randomAttack2 (strength, crit) {
+    if((Math.random()* 100) < crit){
+      return (Math.floor(((Math.random() * 4) + 9)*(strength/100)))*2
+    } else{
+      return Math.floor(((Math.random() * 4) + 9)*(strength/100))
+    };
   }
 
   player1PrimaryAttack() {
-     this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1)});
+     this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1, this.state.crit1)});
   }
   player1SecondaryAttack() {
-     this.setState({hp2: this.state.hp2 - this.randomAttack2(this.state.strength1)});
+     this.setState({hp2: this.state.hp2 - this.randomAttack2(this.state.strength1, this.state.crit1)});
   }
 
   player2PrimaryAttack() {
-     this.setState({hp1: this.state.hp1 - this.randomAttack1(this.state.strength2)});
+     this.setState({hp1: this.state.hp1 - this.randomAttack1(this.state.strength2, this.state.crit2)});
   }
   player2SecondaryAttack() {
-     this.setState({hp1: this.state.hp1 - this.randomAttack2(this.state.strength2)});
+     this.setState({hp1: this.state.hp1 - this.randomAttack2(this.state.strength2, this.state.crit2)});
   }
 
   render() {
