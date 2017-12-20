@@ -3,9 +3,12 @@ import './App.css';
 import Player from './Player/Player'
 
 class App extends Component {
- state = {
+  constructor(props){
+    super(props);
+     this.state = {
       FirstPlayer: [],
       SecondPlayer: []
+     }
     }
 
   togglePlayerHandler = (player) => {
