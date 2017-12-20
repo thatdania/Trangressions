@@ -7,6 +7,7 @@ const Player = (props) => {
     <p onClick={props.click} >{props.name}</p>
     <p> {props.hp} </p>
     <p> {props.strength} </p>
+    <img style={{width: 60, height: 60}} src={props.image}></img>
     </div>
   )
 }

@@ -4,16 +4,24 @@ import Player from './Player/Player'
 
 class App extends Component {
  state = {
-      FirstPlayer: [],
-      SecondPlayer: []
+      FirstPlayer: { id: "id1",
+                     name: "Select Player",
+                       hp: "0",
+                 strength: "0",
+                    image: {url: "/uploads/player/goggles.jpg"}
+                  },
+      SecondPlayer: { id: "id2",
+                      name: "Select Player",
+                        hp: "0",
+                  strength: "0",
+                     image: {url: "/uploads/player/goggles.jpg"}
+                    }
     }
 
   togglePlayerHandler = (player) => {
-    if (this.state.FirstPlayer instanceof Array){
-      console.log(player)
+    if (this.state.FirstPlayer.name === "Select Player" ){
       this.setState({FirstPlayer: player})}
-    else if (this.state.SecondPlayer instanceof Array){
-      console.log(player)
+    else if (this.state.SecondPlayer.name === "Select Player" ){
       this.setState({SecondPlayer: player})
     }
   }
@@ -28,27 +36,32 @@ class App extends Component {
       })
   }
 
+
   render() {
     if (!this.state.playerData) {
       return <p>Loading Players...</p>
 
     } else {
 
-      const listOfPlayers = this.state.playerData.map( (player) => {
-        return <Player name= {player.name}
-          click={() => this.togglePlayerHandler(player)}
-          key={player.id}/>;
+      const listOfPlayers = this.state.playerData.map(player => {
+        return <Player
+          name = {player.name}
+         image = {"http://localhost:4000" + player.image.url}
+         click = {() => this.togglePlayerHandler(player)}
+           key = {player.id}
+           />;
       });
 
       const PlayersChosen = [this.state.FirstPlayer, this.state.SecondPlayer]
 
-      const SelectedPlayers = PlayersChosen.map( player => {
-        if(this.state.FirstPlayer instanceof Array) { return <Player name= {"Select Player"}/> } else {
-        return <Player name= {player.name}
-        hp =  {"Health: " + player.hp}
-        strength = {"Strength: " + player.strength}
-        key={player.strength}/>;
-      }
+      const SelectedPlayers = PlayersChosen.map(player => {
+        return <Player
+          name = {player.name}
+         image = {"http://localhost:4000" + player.image.url}
+            hp =  {"Health: " + player.hp}
+      strength = {"Strength: " + player.strength}
+           key = {player.id}
+          />;
       });
 
 
@@ -56,9 +69,8 @@ class App extends Component {
 
       return (
         <ul>
-          {listOfPlayers}
-           {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
-
+          {listOfPlayers} <br></br>
+          {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}  <br></br>
           {SelectedPlayers}
         </ul>
       );
