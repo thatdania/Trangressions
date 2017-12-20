@@ -60,6 +60,8 @@ class App extends Component {
         }
       });
 
+      {console.log(this.state.FirstPlayer.name)}
+
       return (
         <ul>
           {listOfPlayers}
@@ -68,7 +70,7 @@ class App extends Component {
           {SelectedPlayers}
 
           <button onClick={this._onButtonClick}>Fight</button>
-            {this.state.showComponent ? <Battle  /> : null}
+            {this.state.showComponent ? <Battle name1={this.state.FirstPlayer.name} hp1={this.state.FirstPlayer.hp} name2={this.state.SecondPlayer.name} hp2={this.state.SecondPlayer.hp} /> : null}
         </ul>
       );
     }
