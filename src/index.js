@@ -2,11 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Api from './Api';
 
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<h1><App></App></h1>, document.getElementById('root'));
+ReactDOM.render(<h4><App></App></h4>, document.getElementById('root'));
 
 registerServiceWorker();
 // ReactDOM.render(<Api />, document.getElementById('root'));
