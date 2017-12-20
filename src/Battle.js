@@ -1,7 +1,10 @@
 import './App.css';
-import { Api } from './Api'
+import React, { Component } from 'react';
 
-class Player extends Component {
+// import { Api } from './Api'
+// import Player from './Player/Player'
+
+class Battle extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -37,3 +40,6 @@ class Player extends Component {
 
       </span>
     );
+}
+}
+export default Battle;

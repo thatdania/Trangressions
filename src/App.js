@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
 import './App.css';
 import Player from './Player/Player'
+import Battle from './Battle'
+import renderIf from './RenderIf';
 
 class App extends Component {
- state = {
-      FirstPlayer: { id: "id1",
-                     name: "Select Player",
-                       hp: "0",
-                 strength: "0",
-                    image: {url: "/uploads/player/goggles.jpg"}
-                  },
-      SecondPlayer: { id: "id2",
-                      name: "Select Player",
-                        hp: "0",
-                  strength: "0",
-                     image: {url: "/uploads/player/goggles.jpg"}
-                    }
-    }
+constructor(props){
+  super(props);
+  this.state = {
+    FirstPlayer: { id: "id1",
+      name: "Select Player",
+      hp: "0",
+      strength: "0",
+      image: {url: "/uploads/player/goggles.jpg"}
+    },
+    SecondPlayer: { id: "id2",
+      name: "Select Player",
+      hp: "0",
+      strength: "0",
+      image: {url: "/uploads/player/goggles.jpg"}
+    },
+    showComponent: false,
+    listPlayers: true,
+    listSelected: true
+  }
+  this._onButtonClick=  this._onButtonClick.bind(this)
+}
+
+
 
   togglePlayerHandler = (player) => {
     if (this.state.FirstPlayer.name === "Select Player" ){
@@ -28,21 +39,27 @@ class App extends Component {
 
   componentDidMount() {
     fetch('http://localhost:4000/api/players/players.json')
-      .then(d => d.json())
-      .then(d => {
+      .then(data => data.json())
+      .then(data=> {
         this.setState({
-          playerData: d
+          playerData: data
         })
       })
   }
 
+  _onButtonClick(){
+    this.setState({
+      showComponent: true,
+      listPlayers: false,
+      listSelected: false
+    });
+  }
 
   render() {
     if (!this.state.playerData) {
       return <p>Loading Players...</p>
 
     } else {
-
       const listOfPlayers = this.state.playerData.map(player => {
         return <Player
           name = {player.name}
@@ -64,14 +81,16 @@ class App extends Component {
           />;
       });
 
-
-
-
       return (
         <ul>
-          {listOfPlayers} <br></br>
-          {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}  <br></br>
-          {SelectedPlayers}
+        {renderIf(this.state.listPlayers, listOfPlayers)} <br></br>
+      {renderIf(this.state.listSelected, SelectedPlayers)}<br></br>
+
+           {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
+
+
+          <button onClick={this._onButtonClick}> Fight </button>
+            {this.state.showComponent ? <Battle name1={this.state.FirstPlayer.name} hp1={this.state.FirstPlayer.hp} action1={this.state.FirstPlayer.action} name2={this.state.SecondPlayer.name} hp2={this.state.SecondPlayer.hp} action2={this.state.FirstPlayer.action}/> : null}
         </ul>
       );
     }
