@@ -8,6 +8,7 @@ class Battle extends Component {
   constructor(props){
     super(props);
     this.state = {
+      turn: 1,
       hp1: this.props.player1.hp,
       hp2: this.props.player2.hp,
       strength1: this.props.player1.strength,
@@ -38,20 +39,44 @@ class Battle extends Component {
   }
 
   player1PrimaryAttack() {
-     this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1, this.state.crit1)});
+    if (this.state.turn === 1) {
+      this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1, this.state.crit1)});
+      this.state.turn = 2;
+    }
   }
   player1SecondaryAttack() {
+    if (this.state.turn === 1) {
      this.setState({hp2: this.state.hp2 - this.randomAttack2(this.state.strength1, this.state.crit1)});
+     this.state.turn = 2;
+   }
   }
 
   player2PrimaryAttack() {
+    if (this.state.turn === 2) {
      this.setState({hp1: this.state.hp1 - this.randomAttack1(this.state.strength2, this.state.crit2)});
+     this.state.turn = 1;
+   }
   }
   player2SecondaryAttack() {
+    if (this.state.turn === 2) {
      this.setState({hp1: this.state.hp1 - this.randomAttack2(this.state.strength2, this.state.crit2)});
+     this.state.turn = 1;
+   }
   }
 
+
+
   render() {
+    //
+    // const displayTurn = "n"
+    //
+    // if (this.state.turn === 1) {
+    //   const displayTurn = "It's " + this.props.player1.name +"'s turn!\n Choose your move!"
+    // } else {
+    //   const displayTurn = "It's " + this.props.player2.name +"'s turn!\n Choose your move!"
+    // };
+
+
     return (
       <span>
         <div id='player1'>
@@ -62,6 +87,7 @@ class Battle extends Component {
           <button onClick={this.player1SecondaryAttack}>{this.props.player1.actions[1].name}</button>
         </div>
         <br />
+
         <br />
         <div id='player2'>
           <p>{this.props.player2.name}</p>
