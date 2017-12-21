@@ -34,6 +34,7 @@ class Battle extends Component {
     this.player1Lose = this.player1Lose.bind(this);
     this.player2Lose = this.player2Lose.bind(this);
   }
+
   componentDidMount() {
     fetch('http://localhost:4000/api/action_pictures/action_pictures.json')
       .then(data => data.json())
@@ -48,17 +49,11 @@ class Battle extends Component {
     return Math.floor(((Math.random() * 4) + num)*(strength/100))
   }
 
-  stop(hpLevel){
-   return hpLevel > 0;
-  }
-
   attack1(level){
       if( this.state.turn === 1){
         this.handleAdd();
         this.state.turn = 2;
         return this.state.hp2 - this.randomAttack(this.state.strength1, level);
-    } else {
-      return this.state.hp2
     }
   }
 
@@ -67,8 +62,6 @@ class Battle extends Component {
       this.handleAdd();
       this.state.turn = 1;
       return this.state.hp1 - this.randomAttack(this.state.strength2, level);
-    } else {
-      return this.state.hp1
     }
   }
 
@@ -81,26 +74,22 @@ class Battle extends Component {
   }
 
   player1PrimaryAttack() {
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp2 >= 12 ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player1SecondaryAttack() {
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp2 >= 12 ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player2PrimaryAttack() {
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp1 >= 12 ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
 
   player2SecondaryAttack() {
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp1 >= 12 ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
 
