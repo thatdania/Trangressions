@@ -104,6 +104,7 @@ constructor(props){
             {listOfPlayers} <br></br>
             {SelectedPlayers}<br></br>
             {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
+            <br />
             <button onClick={this._onButtonClick}> Fight </button>
             <button onClick={this.reset}> Reset </button>
           </ToggleDisplay>
