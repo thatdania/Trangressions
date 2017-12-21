@@ -2,13 +2,22 @@ import React, { Component } from 'react';
 import './App.css';
 import Player from './Player/Player'
 
+
 class App extends Component {
- state = {
+  constructor(props){
+    super(props);
+    this.concatStrings = this.concatStrings.bind(this)
+    this.state = {
       FirstPlayer: [],
       SecondPlayer: []
-    }
+    };
+  };
 
-  togglePlayerHandler = (player) => {
+  concatStrings(string1, string2) {
+    return string1+ " " + string2
+  }
+
+  togglePlayerHandler(player) {
     if (this.state.FirstPlayer instanceof Array){
       console.log(player)
       this.setState({FirstPlayer: player})}
@@ -66,4 +75,5 @@ class App extends Component {
   }
 }
 
+export const concatStrings = App.prototype.concatStrings;
 export default App;

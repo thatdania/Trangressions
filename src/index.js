@@ -6,6 +6,7 @@ import Api from './Api';
 
 import registerServiceWorker from './registerServiceWorker';
 
+console.log(<App />)
 ReactDOM.render(<h1><App></App></h1>, document.getElementById('root'));
 
 registerServiceWorker();
