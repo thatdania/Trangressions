@@ -1,5 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
+import { GameOver } from './GameOver'
+import ToggleDisplay from 'react-toggle-display';
 
 // import { Api } from './Api'
 // import Player from './Player/Player'
@@ -11,7 +13,9 @@ class Battle extends Component {
       hp1: this.props.player1.hp,
       hp2: this.props.player2.hp,
       strength1: this.props.player1.strength,
-      strength2: this.props.player2.strength
+      strength2: this.props.player2.strength,
+      showGameOver: false,
+      show: true
     };
     this.player1PrimaryAttack = this.player1PrimaryAttack.bind(this);
     this.player2PrimaryAttack = this.player2PrimaryAttack.bind(this);
@@ -27,40 +31,52 @@ class Battle extends Component {
     return Math.floor(((Math.random() * 4) + 9)*(strength/100))
   }
 
+
   player1PrimaryAttack() {
-     this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1)});
+    const stop = (this.state.hp2 >= 0)
+    stop ? this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1)}) : this.setState({showGameOver: true, show: false})
   }
+
   player1SecondaryAttack() {
-     this.setState({hp2: this.state.hp2 - this.randomAttack2(this.state.strength1)});
+    const stop = (this.state.hp2 >= 0)
+    stop ? this.setState({hp2: this.state.hp2 - this.randomAttack2(this.state.strength1)}) : this.setState({showGameOver: true, show: false})
   }
 
   player2PrimaryAttack() {
-     this.setState({hp1: this.state.hp1 - this.randomAttack1(this.state.strength2)});
+    const stop = (this.state.hp1 >= 0)
+    stop ? this.setState({hp1: this.state.hp1 - this.randomAttack1(this.state.strength2)}) : this.setState({showGameOver: true, show: false})
   }
   player2SecondaryAttack() {
-     this.setState({hp1: this.state.hp1 - this.randomAttack2(this.state.strength2)});
+    const stop = (this.state.hp1 >= 0)
+    stop ? this.setState({hp1: this.state.hp1 - this.randomAttack2(this.state.strength2)}) : this.setState({showGameOver: true, show: false})
   }
 
   render() {
     return (
       <span>
-        <div id='player1'>
-          <p>{this.props.player1.name}</p>
-          <p>Hit Points: {this.state.hp1}</p>
-          <img src={"http://localhost:4000" + this.props.player1.image.url} height="100px" width="100px" />
-          <button onClick={this.player1PrimaryAttack}>{this.props.player1.actions[0].name}</button>
-          <button onClick={this.player1SecondaryAttack}>{this.props.player1.actions[1].name}</button>
-        </div>
-        <br />
-        <br />
-        <div id='player2'>
-          <p>{this.props.player2.name}</p>
-          <p>Hit Points: {this.state.hp2}</p>
-          <img src={"http://localhost:4000" + this.props.player2.image.url} height="100px" width="100px"/>
-          <button onClick={this.player2PrimaryAttack}>{this.props.player2.actions[0].name}</button>
-          <button onClick={this.player2SecondaryAttack}>{this.props.player2.actions[1].name}</button>
-        </div>
+        <ToggleDisplay show={this.state.show}>
+          <div id='player1'>
+            <p>{this.props.player1.name}</p>
+            <p>Hit Points: {this.state.hp1}</p>
+            <img src={"http://localhost:4000" + this.props.player1.image.url} height="100px" width="100px" />
+            <button onClick={this.player1PrimaryAttack}>{this.props.player1.actions[0].name}</button>
+            <button onClick={this.player1SecondaryAttack}>{this.props.player1.actions[1].name}</button>
+          </div>
+          <br />
+          <br />
+          <div id='player2'>
+            <p>{this.props.player2.name}</p>
+            <p>Hit Points: {this.state.hp2}</p>
+            <img src={"http://localhost:4000" + this.props.player2.image.url} height="100px" width="100px"/>
+            <button onClick={this.player2PrimaryAttack}>{this.props.player2.actions[0].name}</button>
+            <button onClick={this.player2SecondaryAttack}>{this.props.player2.actions[1].name}</button>
+          </div>
+        </ToggleDisplay>
+        <ToggleDisplay show={this.state.showGameOver}>
+          <GameOver />
+        </ToggleDisplay>
       </span>
+
     );
 }
 }
