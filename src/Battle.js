@@ -60,8 +60,6 @@ class Battle extends Component {
           <button onClick={this.player2PrimaryAttack}>{this.props.player2.actions[0].name}</button>
           <button onClick={this.player2SecondaryAttack}>{this.props.player2.actions[1].name}</button>
         </div>
-
-
       </span>
     );
 }
