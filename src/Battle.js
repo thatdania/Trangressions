@@ -34,6 +34,7 @@ class Battle extends Component {
     this.player1Lose = this.player1Lose.bind(this);
     this.player2Lose = this.player2Lose.bind(this);
   }
+
   componentDidMount() {
     fetch('http://localhost:4000/api/action_pictures/action_pictures.json')
       .then(data => data.json())
@@ -46,10 +47,6 @@ class Battle extends Component {
 
   randomAttack (strength, num) {
     return Math.floor(((Math.random() * 4) + num)*(strength/100))
-  }
-
-  stop(hpLevel){
-   return hpLevel > 0;
   }
 
   attack1(level){
@@ -81,26 +78,22 @@ class Battle extends Component {
   }
 
   player1PrimaryAttack() {
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp2 >= 10 ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player1SecondaryAttack() {
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp2 >= 10 ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player2PrimaryAttack() {
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp1 >= 10 ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
 
   player2SecondaryAttack() {
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp1 >= 10 ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
 
