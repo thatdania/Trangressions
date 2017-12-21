@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Player from './Player/Player'
 import Battle from './Battle'
-import renderIf from './RenderIf';
 import ToggleDisplay from 'react-toggle-display';
 
 class App extends Component {
@@ -25,18 +24,15 @@ constructor(props){
       action2: "",
       image: {url: "/uploads/player/goggles.jpg"}
     },
-    showComponent: false,
+    showBattle: false,
     show: true
   }
   this._onButtonClick=  this._onButtonClick.bind(this)
+  this.reset = this.reset.bind(this)
 }
 
   togglePlayerHandler = (player) => {
-    if (this.state.FirstPlayer.name === "Select Player" ){
-      this.setState({FirstPlayer: player})}
-    else if (this.state.SecondPlayer.name === "Select Player" ){
-      this.setState({SecondPlayer: player})
-    }
+    this.state.FirstPlayer.name === "Select Player" ? this.setState({FirstPlayer: player}) : this.setState({SecondPlayer: player})
   }
 
   componentDidMount() {
@@ -51,9 +47,30 @@ constructor(props){
 
   _onButtonClick(){
     this.setState({
-      showComponent: true,
+      showBattle: true,
       show: !this.state.show
     });
+  }
+
+  reset() {
+    this.setState({
+      FirstPlayer: { id: "id1",
+        name: "Select Player",
+        hp: "0",
+        strength: "0",
+        action1: "",
+        action2: "",
+        image: {url: "/uploads/player/goggles.jpg"}
+      },
+      SecondPlayer: { id: "id2",
+        name: "Select Player",
+        hp: "0",
+        strength: "0",
+        action1: "",
+        action2: "",
+        image: {url: "/uploads/player/goggles.jpg"}
+      }
+    })
   }
 
   render() {
@@ -88,9 +105,11 @@ constructor(props){
             {SelectedPlayers}<br></br>
             {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
             <button onClick={this._onButtonClick}> Fight </button>
+            <button onClick={this.reset}> Reset </button>
           </ToggleDisplay>
-          {this.state.showComponent ? <Battle player1={this.state.FirstPlayer}
-            player2={this.state.SecondPlayer}/> : null}
+
+          {this.state.showBattle ? <Battle player1={this.state.FirstPlayer}
+                                  player2={this.state.SecondPlayer}/> : null}
         </ul>
       );
     }

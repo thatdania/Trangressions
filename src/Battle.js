@@ -2,6 +2,10 @@ import './App.css';
 import React, { Component } from 'react';
 import {CSSTransitionGroup} from 'react-transition-group';
 import './Battle.css'
+import { GameOver } from './GameOver'
+import ToggleDisplay from 'react-toggle-display';
+
+
 
 class Battle extends Component {
   constructor(props){
@@ -14,12 +18,21 @@ class Battle extends Component {
       strength2: this.props.player2.strength,
       crit1: (200 - this.props.player1.strength)*0.25,
       crit2: (200 - this.props.player2.strength)*0.25,
-      items: []
+      items: [],
+      showGameOver: false,
+      show: true,
+      image1: this.props.player1.image.url,
+      image2: this.props.player2.image.url,
+      loser: null
     };
     this.player1PrimaryAttack = this.player1PrimaryAttack.bind(this);
     this.player2PrimaryAttack = this.player2PrimaryAttack.bind(this);
     this.player1SecondaryAttack = this.player1SecondaryAttack.bind(this);
     this.player2SecondaryAttack = this.player2SecondaryAttack.bind(this);
+    this.attack1 = this.attack1.bind(this);
+    this.attack2 = this.attack2.bind(this);
+    this.player1Lose = this.player1Lose.bind(this);
+    this.player2Lose = this.player2Lose.bind(this);
   }
   componentDidMount() {
     fetch('http://localhost:4000/api/action_pictures/action_pictures.json')
@@ -31,55 +44,68 @@ class Battle extends Component {
       })
   }
 
-  randomAttack1(strength , crit){
-    if((Math.random()* 100) < crit){
-      return (Math.floor(((Math.random() * 4) + 6)*(strength/100)))*2
-    } else{
-      return Math.floor(((Math.random() * 4) + 6)*(strength/100))
-    };
+  randomAttack (strength, num) {
+    return Math.floor(((Math.random() * 4) + num)*(strength/100))
   }
 
-  randomAttack2 (strength, crit) {
-    if((Math.random()* 100) < crit){
-      return (Math.floor(((Math.random() * 4) + 9)*(strength/100)))*2
-    } else{
-      return Math.floor(((Math.random() * 4) + 9)*(strength/100))
-    };
+  stop(hpLevel){
+   return hpLevel > 0;
+  }
+
+  attack1(level){
+      if( this.state.turn === 1){
+        this.handleAdd();
+        this.state.turn = 2;
+        return this.state.hp2 - this.randomAttack(this.state.strength1, level);
+    } else {
+      return this.state.hp2
+    }
+  }
+
+  attack2(level){
+    if( this.state.turn === 2){
+      this.handleAdd();
+      this.state.turn = 1;
+      return this.state.hp1 - this.randomAttack(this.state.strength2, level);
+    } else {
+      return this.state.hp1
+    }
+  }
+
+  player1Lose(){
+    return "http://localhost:4000"+this.state.image1;
+  }
+
+  player2Lose(){
+    return "http://localhost:4000"+this.state.image2;
   }
 
   player1PrimaryAttack() {
-    if (this.state.turn === 1) {
-      this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1, this.state.crit1)});
-      this.state.turn = 2;
-      this.handleAdd()
-    }
+    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
+    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: this.player2Lose()});
   }
+
   player1SecondaryAttack() {
-    if (this.state.turn === 1) {
-     this.setState({hp2: this.state.hp2 - this.randomAttack2(this.state.strength1, this.state.crit1)});
-     this.state.turn = 2;
-     this.handleAdd()
-   }
+    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: this.player2Lose()});
   }
 
   player2PrimaryAttack() {
-    if (this.state.turn === 2) {
-     this.setState({hp1: this.state.hp1 - this.randomAttack1(this.state.strength2, this.state.crit2)});
-     this.state.turn = 1;
-     this.handleAdd()
-   }
+    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: this.player1Lose()});
   }
+
   player2SecondaryAttack() {
-    if (this.state.turn === 2) {
-     this.setState({hp1: this.state.hp1 - this.randomAttack2(this.state.strength2, this.state.crit2)});
-     this.state.turn = 1;
-     this.handleAdd()
-   }
+    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
+    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: this.player1Lose()});
   }
 
   handleAdd() {
     const newItems = [this.state.picturesData[Math.floor(Math.random() * this.state.picturesData.length)]];
-    console.log(newItems)
     this.setState({items: newItems});
   }
 
@@ -87,13 +113,14 @@ class Battle extends Component {
     if(!this.state.picturesData){
       return <p>Loading Battle...</p>
     } else {
-      console.log(this.state.items)
-      const items = this.state.items.map((item) => (
+
+      const picture = this.state.items.map((item) => (
         <img src={"http://localhost:4000/" + item.image} key={item.id} height="100px" width="100px"/>
       ));
 
       return (
-        <span>
+      <span>
+        <ToggleDisplay show={this.state.show}>
           <div id='player1'>
             <p>{this.props.player1.name}</p>
             <p>Hit Points: {this.state.hp1}</p>
@@ -102,7 +129,7 @@ class Battle extends Component {
             <button onClick={this.player1SecondaryAttack}>{this.props.player1.actions[1].name}</button>
           </div>
           <br />
-              {items}
+              {picture}
           <br />
           <div id='player2'>
             <p>{this.props.player2.name}</p>
@@ -111,10 +138,13 @@ class Battle extends Component {
             <button onClick={this.player2PrimaryAttack}>{this.props.player2.actions[0].name}</button>
             <button onClick={this.player2SecondaryAttack}>{this.props.player2.actions[1].name}</button>
           </div>
+        </ToggleDisplay>
+        <ToggleDisplay show={this.state.showGameOver}>
+          <GameOver image={this.state.loser} />
+        </ToggleDisplay>
+      </span>
 
-
-        </span>
-      );
+    );
     }
   }
 }
