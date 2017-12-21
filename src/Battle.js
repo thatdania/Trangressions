@@ -54,8 +54,6 @@ class Battle extends Component {
         this.handleAdd();
         this.state.turn = 2;
         return this.state.hp2 - this.randomAttack(this.state.strength1, level);
-    } else {
-      return this.state.hp2
     }
   }
 
@@ -64,8 +62,6 @@ class Battle extends Component {
       this.handleAdd();
       this.state.turn = 1;
       return this.state.hp1 - this.randomAttack(this.state.strength2, level);
-    } else {
-      return this.state.hp1
     }
   }
 
@@ -78,22 +74,22 @@ class Battle extends Component {
   }
 
   player1PrimaryAttack() {
-    this.state.hp2 >= 10 ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp2 >= 12 ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player1SecondaryAttack() {
-    this.state.hp2 >= 10 ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp2 >= 12 ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player2PrimaryAttack() {
-    this.state.hp1 >= 10 ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp1 >= 12 ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
 
   player2SecondaryAttack() {
-    this.state.hp1 >= 10 ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp1 >= 12 ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
 
