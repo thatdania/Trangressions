@@ -15,13 +15,16 @@ class Battle extends Component {
       strength1: this.props.player1.strength,
       strength2: this.props.player2.strength,
       showGameOver: false,
-      show: true
+      show: true,
+      image1: this.props.player1.image.url,
+      loser: "here"
     };
     this.player1PrimaryAttack = this.player1PrimaryAttack.bind(this);
     this.player2PrimaryAttack = this.player2PrimaryAttack.bind(this);
     this.player1SecondaryAttack = this.player1SecondaryAttack.bind(this);
     this.player2SecondaryAttack = this.player2SecondaryAttack.bind(this);
   }
+
 
   randomAttack1 (strength) {
     return Math.floor(((Math.random() * 4) + 6)*(strength/100))
@@ -35,20 +38,25 @@ class Battle extends Component {
   player1PrimaryAttack() {
     const stop = (this.state.hp2 >= 0)
     stop ? this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: "http://localhost:4000" + this.state.image2});
   }
 
   player1SecondaryAttack() {
     const stop = (this.state.hp2 >= 0)
     stop ? this.setState({hp2: this.state.hp2 - this.randomAttack2(this.state.strength1)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: "http://localhost:4000" + this.state.image2});
   }
 
   player2PrimaryAttack() {
     const stop = (this.state.hp1 >= 0)
     stop ? this.setState({hp1: this.state.hp1 - this.randomAttack1(this.state.strength2)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: "http://localhost:4000" + this.state.image1});
+
   }
   player2SecondaryAttack() {
     const stop = (this.state.hp1 >= 0)
     stop ? this.setState({hp1: this.state.hp1 - this.randomAttack2(this.state.strength2)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: "http://localhost:4000" + this.state.image1});
   }
 
   render() {
@@ -73,7 +81,7 @@ class Battle extends Component {
           </div>
         </ToggleDisplay>
         <ToggleDisplay show={this.state.showGameOver}>
-          <GameOver />
+          <GameOver image={this.state.loser} />
         </ToggleDisplay>
       </span>
 
