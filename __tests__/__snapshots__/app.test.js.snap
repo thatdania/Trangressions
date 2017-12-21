@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`String Concatenation concatenates two strings 1`] = `
+exports[`FEATURE - App it renders Loading Players... to the page 1`] = `
 <p>
   Loading Players...
 </p>

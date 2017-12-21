@@ -31,6 +31,7 @@ class App extends Component {
     fetch('http://localhost:4000/api/players/players.json')
       .then(d => d.json())
       .then(d => {
+        console.log(d)
         this.setState({
           playerData: d
         })
