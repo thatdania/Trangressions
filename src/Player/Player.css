@@ -1,11 +1,15 @@
 .playerSheet {
   display: inline-block;
-  padding: 16px;
+  padding: 20px;
   text-align: center;
   margin: 16px;
-  border: 1px solid black;
+  border: none;
+  background-color: rgb(40, 194, 125);
+  font-family: Bangers;
 }
 
-.playerSheet:hover {
-  background-color: rgb(40, 138, 156);
+.image{
+  -webkit-clip-path: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
+
 }
