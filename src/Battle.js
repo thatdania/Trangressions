@@ -17,46 +17,61 @@ class Battle extends Component {
       showGameOver: false,
       show: true,
       image1: this.props.player1.image.url,
-      loser: "here"
+      image2: this.props.player2.image.url,
+      loser: null
     };
     this.player1PrimaryAttack = this.player1PrimaryAttack.bind(this);
     this.player2PrimaryAttack = this.player2PrimaryAttack.bind(this);
     this.player1SecondaryAttack = this.player1SecondaryAttack.bind(this);
     this.player2SecondaryAttack = this.player2SecondaryAttack.bind(this);
+    this.attack1 = this.attack1.bind(this);
+    this.attack2 = this.attack2.bind(this);
+    this.player1Lose = this.player1Lose.bind(this);
+    this.player2Lose = this.player2Lose.bind(this);
   }
 
-
-  randomAttack1 (strength) {
-    return Math.floor(((Math.random() * 4) + 6)*(strength/100))
+  randomAttack (strength, num) {
+    return Math.floor(((Math.random() * 4) + num)*(strength/100))
   }
 
-  randomAttack2 (strength) {
-    return Math.floor(((Math.random() * 4) + 9)*(strength/100))
+  stop(hpLevel){
+   return hpLevel >= 0;
   }
 
+  attack1(level){
+    return this.state.hp2 - this.randomAttack(this.state.strength1, level);
+  }
+
+  attack2(level){
+    return this.state.hp1 - this.randomAttack(this.state.strength2, level);
+  }
+
+  player1Lose(){
+    return "http://localhost:4000"+this.state.image1;
+  }
+
+  player2Lose(){
+    return "http://localhost:4000"+this.state.image2;
+  }
 
   player1PrimaryAttack() {
-    const stop = (this.state.hp2 >= 0)
-    stop ? this.setState({hp2: this.state.hp2 - this.randomAttack1(this.state.strength1)}) : this.setState({showGameOver: true, show: false})
-    this.setState({loser: "http://localhost:4000" + this.state.image2});
+    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: this.player2Lose()});
   }
 
   player1SecondaryAttack() {
-    const stop = (this.state.hp2 >= 0)
-    stop ? this.setState({hp2: this.state.hp2 - this.randomAttack2(this.state.strength1)}) : this.setState({showGameOver: true, show: false})
-    this.setState({loser: "http://localhost:4000" + this.state.image2});
+    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: this.player2Lose()});
   }
 
   player2PrimaryAttack() {
-    const stop = (this.state.hp1 >= 0)
-    stop ? this.setState({hp1: this.state.hp1 - this.randomAttack1(this.state.strength2)}) : this.setState({showGameOver: true, show: false})
-    this.setState({loser: "http://localhost:4000" + this.state.image1});
-
+    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: this.player1Lose()});
   }
+
   player2SecondaryAttack() {
-    const stop = (this.state.hp1 >= 0)
-    stop ? this.setState({hp1: this.state.hp1 - this.randomAttack2(this.state.strength2)}) : this.setState({showGameOver: true, show: false})
-    this.setState({loser: "http://localhost:4000" + this.state.image1});
+    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
+    this.setState({loser: this.player1Lose()});
   }
 
   render() {
@@ -86,6 +101,6 @@ class Battle extends Component {
       </span>
 
     );
-}
+  }
 }
 export default Battle;

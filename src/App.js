@@ -24,7 +24,7 @@ constructor(props){
       action2: "",
       image: {url: "/uploads/player/goggles.jpg"}
     },
-    showComponent: false,
+    showBattle: false,
     show: true
   }
   this._onButtonClick=  this._onButtonClick.bind(this)
@@ -32,11 +32,7 @@ constructor(props){
 }
 
   togglePlayerHandler = (player) => {
-    if (this.state.FirstPlayer.name === "Select Player" ){
-      this.setState({FirstPlayer: player})}
-    else if (this.state.SecondPlayer.name === "Select Player" ){
-      this.setState({SecondPlayer: player})
-    }
+    this.state.FirstPlayer.name === "Select Player" ? this.setState({FirstPlayer: player}) : this.setState({SecondPlayer: player})
   }
 
   componentDidMount() {
@@ -51,7 +47,7 @@ constructor(props){
 
   _onButtonClick(){
     this.setState({
-      showComponent: true,
+      showBattle: true,
       show: !this.state.show
     });
   }
@@ -112,8 +108,8 @@ constructor(props){
             <button onClick={this.reset}> Reset </button>
           </ToggleDisplay>
 
-          {this.state.showComponent ? <Battle player1={this.state.FirstPlayer}
-            player2={this.state.SecondPlayer}/> : null}
+          {this.state.showBattle ? <Battle player1={this.state.FirstPlayer}
+                                  player2={this.state.SecondPlayer}/> : null}
         </ul>
       );
     }
