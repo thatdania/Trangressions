@@ -1,8 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
-
-// import { Api } from './Api'
-// import Player from './Player/Player'
+import {CSSTransitionGroup} from 'react-transition-group';
+import './Battle.css'
 
 class Battle extends Component {
   constructor(props){
@@ -67,15 +66,6 @@ class Battle extends Component {
 
 
   render() {
-    //
-    // const displayTurn = "n"
-    //
-    // if (this.state.turn === 1) {
-    //   const displayTurn = "It's " + this.props.player1.name +"'s turn!\n Choose your move!"
-    // } else {
-    //   const displayTurn = "It's " + this.props.player2.name +"'s turn!\n Choose your move!"
-    // };
-
 
     return (
       <span>
@@ -87,7 +77,13 @@ class Battle extends Component {
           <button onClick={this.player1SecondaryAttack}>{this.props.player1.actions[1].name}</button>
         </div>
         <br />
-
+          <CSSTransitionGroup
+            transitionName="example"
+            transitionAppear={true}
+            transitionLeave={true}
+            transitionLeaveTimeout={1000}
+            transitionAppearTimeout={1000}>
+            <img src={"http://localhost:4000" + this.props.player1.image.url} height="100px" width="100px" /></CSSTransitionGroup>
         <br />
         <div id='player2'>
           <p>{this.props.player2.name}</p>
