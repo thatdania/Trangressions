@@ -94,6 +94,7 @@ constructor(props){
          image = {"http://localhost:4000" + player.image.url}
             hp =  {"Health: " + player.hp}
       strength = {"Strength: " + player.strength}
+         showed = {player.hp}
            key = {player.id}
           />;
       });
