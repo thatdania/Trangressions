@@ -1,28 +1,83 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Bangers|Russo+One');
+
+*{
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+
+body {
+  box-sizing: border-box;
+  padding-bottom: 2cm;
+  background-color: #d63232;
+}
+
+.player{
+  border-radius: 20px;
+}
+
+.versus {
+  font-family: Bangers;
+  font-size: 35px;
   text-align: center;
+  width: 620px;
+   height: 100px;
+   position: fixed;
+   top: 55%;
+   left: 50%;
+   margin-left: -310px;
+   margin-top: -50px;
+   color: #19717e;
+   -webkit-text-stroke-width: 0.02px;
+   -webkit-text-stroke-color: #fdea34;
+   text-shadow: 2px 5px rgb(32, 30, 31);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.fight {
+  font-family: Bangers;
+  font-size: 35px;
+  color: yellow;
+  position: absolute;
+  left: 31%;
+  top: 57%;
+  width: 200px;
+  padding: 10px 20px;
+  outline: none;
+  border: 2px solid #fdea34;
+  background-color: #19717e;
+  box-shadow: 6px 8px #1f2226;
+
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.fight:active{
+  transform: translateY(0.3rem);
+  box-shadow: 0.3rem 0.3rem #1f2226;
 }
 
-.App-title {
-  font-size: 1.5em;
+
+.reset{
+  font-family: Bangers;
+  font-size: 35px;
+  color: yellow;
+  position: absolute;
+  left: 51%;
+  top: 57%;
+  width: 200px;
+  padding: 10px 20px;
+  outline: none;
+  border: 2px solid #fdea34;
+
+  background-color: #19717e;
+  box-shadow: -5px 8px #1f2226;
 }
 
-.App-intro {
-  font-size: large;
+.reset:active{
+  transform: translateY(0.3rem);
+  box-shadow: -0.2rem 0.3rem #1f2226;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.move{
+  position: absolute;
+  left: 30%;
 }

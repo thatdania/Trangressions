@@ -1,17 +1,179 @@
-.example-leave {
-  opacity: 1;
+@import url('https://fonts.googleapis.com/css?family=Bangers|Russo+One');
+
+*{
+  margin: 0 auto;
+  padding: 0;
 }
 
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 5s ease-in;
+body {
+  box-sizing: border-box;
+  padding-bottom: 2cm;
 }
 
-.example-appear {
-  opacity: 0.01;
+.p1name{
+  font-family: Bangers;
+  font-size: 40px;
+  position: absolute;
+  top:12%;
+  left:8%;
+  color: #17181a;
 }
 
-.example-appear.example-appear-active {
-  opacity: 1;
-  transition: opacity 5s ease-in;
+.p2name{
+  font-family: Bangers;
+  font-size: 40px;
+  position: absolute;
+  top:12%;
+  left:77.5%;
+  color: #17181a;
+}
+
+.circle{
+  background-color: white;
+  width: 200px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: 7%;
+  left: 5%;
+  box-shadow: 6px 8px #222529;
+}
+
+.circle2{
+  background-color: white;
+  width: 200px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: 7%;
+  left: 75%;
+  box-shadow: 6px 8px #222529;
+}
+
+.power{
+  position: absolute;
+  left:38%;
+  top:12%;
+}
+
+.p1{
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  -webkit-clip-path: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
+}
+
+.p2{
+  position: absolute;
+  top: 25%;
+  left: 66%;
+  -webkit-clip-path: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
+}
+
+.h1{
+  font-family: Bangers;
+  font-size: 35px;
+  position: absolute;
+  left: 20%;
+  top: 84%;
+}
+
+.h2{
+  font-family: Bangers;
+  font-size: 35px;
+  position: absolute;
+  left: 63%;
+  top: 84%;
+}
+
+.attack1{
+  font-family: Bangers;
+  font-size: 35px;
+  text-align: center;
+  padding: 10px 10px;
+  background-color: #ffbf00;
+  border: none;
+  width: 170px;
+  height: 85px;
+  position: absolute;
+  left: 12%;
+  top: 62%;
+  box-shadow: 3px 8px #1f2226;
+  outline: none;
+}
+
+.attack1:active{
+  transform: translateY(0.3rem);
+  box-shadow: 0.2rem 0.3rem #1f2226;
+}
+
+.attack2{
+  font-family: Bangers;
+  font-size: 30px;
+  -webkit-text-stroke-width: 1.7px;
+ -webkit-text-stroke-color: #c62f2f;
+  color: #fdea34;
+  background-color: #19717e;
+  border: none;
+  text-align: center;
+  padding: 10px 10px;
+  width: 170px;
+  height: 85px;
+  position: absolute;
+  left: 28%;
+  top: 62.1%;
+  box-shadow: 4px 8px #1f2226;
+  outline: none;
+}
+
+.attack2:active{
+  transform: translateY(0.3rem);
+  box-shadow: 0.2rem 0.2rem #1f2226;
+}
+
+.attack3{
+  font-family: Bangers;
+  font-size: 40px;
+  -webkit-text-stroke-width: 1.7px;
+ -webkit-text-stroke-color: #c62f2f;
+  color: #fdea34;
+  background-color: #19717e;
+  border: none;
+  text-align: center;
+  padding: 10px 10px;
+  width: 170px;
+  height: 85px;
+  position: absolute;
+  left: 56%;
+  top: 62%;
+  box-shadow: -4px 9px #1f2226;
+  outline: none;
+}
+
+.attack3:active{
+  transform: translateY(0.3rem);
+  box-shadow: -0.2rem 0.2rem #1f2226;
+}
+
+.attack4{
+  font-family: Bangers;
+  font-size: 30px;
+  text-align: center;
+  background-color: #ffbf00;
+  border: none;
+  padding: 10px 10px;
+  width: 170px;
+  height: 85px;
+  position: absolute;
+  left: 72%;
+  top: 62%;
+  box-shadow: -4px 8px #1f2226;
+  outline: none;
+}
+
+.attack4:active{
+  transform: translateY(0.3rem);
+  box-shadow: -0.2rem 0.2rem #1f2226;
 }

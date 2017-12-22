@@ -78,25 +78,27 @@ constructor(props){
       return <p>Loading Players...</p>
     } else {
       const listOfPlayers = this.state.playerData.map( player => {
-        return <Player
+        return <div class="character"> <Player
           name = {player.name}
           image = {"http://localhost:4000" + player.image.url}
           click = {() => this.togglePlayerHandler(player)}
           key = {player.id}
-           />;
+           /></div>
       });
 
       const PlayersChosen = [this.state.FirstPlayer, this.state.SecondPlayer]
 
       const SelectedPlayers = PlayersChosen.map( player => {
+
         return <Player
+
           name = {player.name}
          image = {"http://localhost:4000" + player.image.url}
             hp =  {"Health: " + player.hp}
       strength = {"Strength: " + player.strength}
          showed = {player.hp}
            key = {player.id}
-          />;
+          />
       });
 
       return (
@@ -104,10 +106,12 @@ constructor(props){
           <ToggleDisplay show={this.state.show}>
             {listOfPlayers} <br></br>
             {SelectedPlayers}<br></br>
+            <div class="versus">
             {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
+            </div>
             <br />
-            <button onClick={this._onButtonClick}> Fight </button>
-            <button onClick={this.reset}> Reset </button>
+            <button class="fight" onClick={this._onButtonClick}> Fight </button>
+            <button class="reset" onClick={this.reset}> Reset </button>
           </ToggleDisplay>
 
           {this.state.showBattle ? <Battle player1={this.state.FirstPlayer}
