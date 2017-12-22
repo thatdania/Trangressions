@@ -28,6 +28,8 @@ export class GameOver extends Component {
           <div className="moveimage">
           <img className="image" src={this.props.image} height="200px" width="200px" />
           </div>
+          <img class="you" src='images/you-.png' height="200px" width="200px"/>
+          <img class="lose" src='images/lose.png' height="50px" width="100px"/>
           <button className="button" onClick={this.playAgain}>Play Again?</button>
         </ToggleDisplay>
         <ToggleDisplay show={this.state.startNew}>

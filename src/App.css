@@ -115,3 +115,15 @@ body {
   left: 65%;
   transform: rotate(80deg);
 }
+
+.you{
+  position: absolute;
+  top: 43%;
+  left: 25%;
+}
+
+.lose{
+  position: absolute;
+  top: 55%;
+  left: 57%;
+}
