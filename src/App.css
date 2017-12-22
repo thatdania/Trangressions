@@ -91,10 +91,10 @@ body {
 }
 
 .character{
-  margin: 10px;
+  display: inline-block;
   position: absolute;
   top: 68%;
-  left: 20%;
+  left: 8%;
 }
 
 .title{

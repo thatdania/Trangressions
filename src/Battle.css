@@ -90,7 +90,7 @@ body {
 
 .attack1{
   font-family: Bangers;
-  font-size: 35px;
+  font-size: 25px;
   text-align: center;
   padding: 10px 10px;
   background-color: #ffbf00;
@@ -112,7 +112,7 @@ body {
 
 .attack2{
   font-family: Bangers;
-  font-size: 30px;
+  font-size: 25px;
   -webkit-text-stroke-width: 1.7px;
  -webkit-text-stroke-color: #c62f2f;
   color: #fdea34;
@@ -136,7 +136,7 @@ body {
 
 .attack3{
   font-family: Bangers;
-  font-size: 40px;
+  font-size: 25px;
   -webkit-text-stroke-width: 1.7px;
  -webkit-text-stroke-color: #c62f2f;
   color: #fdea34;
@@ -160,7 +160,7 @@ body {
 
 .attack4{
   font-family: Bangers;
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   background-color: #ffbf00;
   border: none;

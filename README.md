@@ -58,11 +58,11 @@ Back-End: Ruby On Rails
 
 ### Challenges
 
-| Successes             | Failures                    |
+| Successes             | Challenges                  |
 | --------------------- |:---------------------------:|
 | Accomplished MVP      | Testing (Figuring out Jest) |
-| Delegated teamwork    |                             |
-| Had a  good time      | -                           |
+| Delegated teamwork    | Learning React in a short period of time         |
+| Had a good time       | Having an explorative approach |
 
 
 ## MVP:
