@@ -31,10 +31,39 @@ npm start
 
 ~Enjoy!
 
-##Approach:
+## Approach:
 
 Inspired by a Tekken Game and our cohort members at Makers Academy, we initially drew out an MVP to setup the basics of what made our
-game unique. From there, whilst working in pairs, we expanded into the other User stories we achieved (that is listed down below). 
+game unique. From there, whilst working in pairs, we expanded into the other User stories we achieved (that is listed down below).
+
+![](public/images/2.jpg)
+
+![](public/images/3.jpg)
+
+![](public/images/4.jpg)
+
+Here, we always had retros to write down the list of things to do for tomorrow and cherish the stuff that we did today. This is how the team
+stayed focused.
+
+### Technologies
+
+Front-End: React
+ (Gems)
+ - React-Sound
+ - React-Toggle-Display
+
+Back-End: Ruby On Rails
+ - Responders
+
+
+### Challenges
+
+| Successes             | Failures                    |
+| --------------------- |:---------------------------:|
+| Accomplished MVP      | Testing (Figuring out Jest) |
+| Delegated teamwork    |                             |
+| Had a  good time      | -                           |
+
 
 ## MVP:
 
