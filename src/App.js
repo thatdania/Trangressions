@@ -26,7 +26,9 @@ constructor(props){
       image: {url: "/uploads/player/goggles.jpg"}
     },
     showBattle: false,
-    show: true
+    show: true,
+    sound: 'menu.mp3',
+    play: 'PLAYING'
   }
   this._onButtonClick=  this._onButtonClick.bind(this)
   this.reset = this.reset.bind(this)
@@ -49,7 +51,8 @@ constructor(props){
   _onButtonClick(){
     this.setState({
       showBattle: true,
-      show: !this.state.show
+      show: !this.state.show,
+      play: 'STOPPED'
     });
   }
 
@@ -102,15 +105,14 @@ constructor(props){
           />
       });
 
+      const Music = <Sound url={"sounds/"+ this.state.sound} playStatus={this.state.play} loop='false'/>
       return (
         <div >
 
 
         <ul>
           <ToggleDisplay show={this.state.show}>
-
-            <Sound url="sounds/menu.mp3" playStatus={Sound.status.PLAYING}/>
-
+            {Music}
             {listOfPlayers} <br></br>
             {SelectedPlayers}<br></br>
             <div class="versus">

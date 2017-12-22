@@ -6,7 +6,6 @@ import ToggleDisplay from 'react-toggle-display';
 import Sound from 'react-sound';
 
 
-
 class Battle extends Component {
   constructor(props){
     super(props);
@@ -78,21 +77,25 @@ class Battle extends Component {
   }
 
   player1PrimaryAttack() {
+    this.soundHandler();
     this.state.hp2 >= 12 ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player1SecondaryAttack() {
+    this.soundHandler();
     this.state.hp2 >= 12 ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player2PrimaryAttack() {
+    this.soundHandler();
     this.state.hp1 >= 12 ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
 
   player2SecondaryAttack() {
+    this.soundHandler();
     this.state.hp1 >= 12 ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
@@ -100,6 +103,18 @@ class Battle extends Component {
   handleAdd() {
     const newItems = [this.state.picturesData[Math.floor(Math.random() * this.state.picturesData.length)]];
     this.setState({items: newItems});
+  }
+
+  soundHandler() {
+    this.setState({
+      sound: 'PLAYING'
+    })
+  }
+
+  reset(){
+    this.setState({
+      sound: 'STOPPED'
+    })
   }
 
   render() {
@@ -111,9 +126,12 @@ class Battle extends Component {
         <img class="power" src={"http://localhost:4000/" + item.image} key={item.id} height="250px" width="300px"/>
       ));
 
+      const reset = this.reset
+
       return (
       <span>
         <ToggleDisplay show={this.state.show}>
+          <Sound url={"sounds/Jab.mp3"} playStatus={this.state.sound}/>
           <div id='player1'>
           <div class='circle'></div>
             <div class='p1name'>
@@ -123,7 +141,8 @@ class Battle extends Component {
             <p>Hit Points: {this.state.hp1}</p>
             </div>
             <img class="p1" src={"http://localhost:4000" + this.props.player1.image.url} height="150px" width="150px" />
-            <button class="attack1" onClick={this.player1PrimaryAttack}>{this.props.player1.actions[0].name}</button>
+            <button class="attack1" onClick={this.player1PrimaryAttack}>{this.props.player1.actions[0].name}
+            </button>
             <button class="attack2" onClick={this.player1SecondaryAttack}>{this.props.player1.actions[1].name}</button>
           </div>
           <br />
@@ -142,6 +161,7 @@ class Battle extends Component {
             <button class="attack4" onClick={this.player2SecondaryAttack}>{this.props.player2.actions[1].name}</button>
           </div>
         </ToggleDisplay>
+        {reset}
         <ToggleDisplay show={this.state.showGameOver}>
           <GameOver image={this.state.loser} />
         </ToggleDisplay>
