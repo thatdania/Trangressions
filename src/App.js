@@ -3,6 +3,7 @@ import './App.css';
 import Player from './Player/Player'
 import Battle from './Battle'
 import ToggleDisplay from 'react-toggle-display';
+import Sound from 'react-sound';
 
 class App extends Component {
 constructor(props){
@@ -26,7 +27,9 @@ constructor(props){
     },
     showBattle: false,
     show: true,
-    showStats: false
+    showStats: false,
+    sound: 'menu.mp3',
+    play: 'PLAYING'
   }
   this._onButtonClick=  this._onButtonClick.bind(this)
   this.reset = this.reset.bind(this)
@@ -49,7 +52,8 @@ constructor(props){
   _onButtonClick(){
     this.setState({
       showBattle: true,
-      show: !this.state.show
+      show: !this.state.show,
+      play: 'STOPPED'
     });
   }
 
@@ -104,14 +108,20 @@ constructor(props){
           />
       });
 
+      const Music = <Sound url={"sounds/"+ this.state.sound} playStatus={this.state.play} loop='false'/>
       return (
+        <div >
+
+
         <ul>
           <ToggleDisplay show={this.state.show}>
+
             <img class="title" src='images/Trangression.png' height="300px" width="500px"/>
             <img class="star" src='images/stars.png' height="100px" width="100px"/>
             <img class="star2" src='images/stars.png' height="50px" width="50px"/>
             <div class="character"> {listOfPlayers} </div><br></br>
             <div class="a"> {SelectedPlayers} </div><br></br>
+            {Music}
             <div class="versus">
             {this.state.FirstPlayer.name + " vs " + this.state.SecondPlayer.name}
             </div>
@@ -123,6 +133,7 @@ constructor(props){
           {this.state.showBattle ? <Battle player1={this.state.FirstPlayer}
                                   player2={this.state.SecondPlayer}/> : null}
         </ul>
+        </div>
       );
     }
   }

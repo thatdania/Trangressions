@@ -1,10 +1,9 @@
 import './App.css';
 import React, { Component } from 'react';
-import {CSSTransitionGroup} from 'react-transition-group';
 import './Battle.css'
 import { GameOver } from './GameOver'
 import ToggleDisplay from 'react-toggle-display';
-
+import Sound from 'react-sound';
 
 
 class Battle extends Component {
@@ -46,13 +45,16 @@ class Battle extends Component {
   }
 
   randomAttack (strength, num) {
+    this.soundHandler();
     return Math.floor(((Math.random() * 4) + num)*(strength/100))
   }
 
   attack1(level){
       if( this.state.turn === 1){
         this.handleAdd();
-        this.state.turn = 2;
+        this.setState({
+          turn: 2
+        })
         return this.state.hp2 - this.randomAttack(this.state.strength1, level);
     } else {
       return this.state.hp2
@@ -62,7 +64,9 @@ class Battle extends Component {
   attack2(level){
     if( this.state.turn === 2){
       this.handleAdd();
-      this.state.turn = 1;
+      this.setState({
+        turn: 1
+      })
       return this.state.hp1 - this.randomAttack(this.state.strength2, level);
     } else {
       return this.state.hp1
@@ -102,6 +106,18 @@ class Battle extends Component {
     this.setState({items: newItems});
   }
 
+  soundHandler() {
+    this.setState({
+      sound: 'PLAYING'
+    })
+  }
+
+  reset(){
+    this.setState({
+      sound: 'STOPPED'
+    })
+  }
+
   render() {
     if(!this.state.picturesData){
       return <p>Loading Battle...</p>
@@ -111,9 +127,12 @@ class Battle extends Component {
         <img class="power" src={"http://localhost:4000/" + item.image} key={item.id} height="250px" width="300px"/>
       ));
 
+      const reset = this.reset
+
       return (
       <span>
         <ToggleDisplay show={this.state.show}>
+          <Sound url={"sounds/Jab.mp3"} playStatus={this.state.sound}/>
           <div id='player1'>
           <div class='circle'></div>
             <div class='p1name'>
@@ -123,7 +142,8 @@ class Battle extends Component {
             <p>Hit Points: {this.state.hp1}</p>
             </div>
             <img class="p1" src={"http://localhost:4000" + this.props.player1.image.url} height="150px" width="150px" />
-            <button class="attack1" onClick={this.player1PrimaryAttack}>{this.props.player1.actions[0].name}</button>
+            <button class="attack1" onClick={this.player1PrimaryAttack}>{this.props.player1.actions[0].name}
+            </button>
             <button class="attack2" onClick={this.player1SecondaryAttack}>{this.props.player1.actions[1].name}</button>
           </div>
           <br />
@@ -142,6 +162,7 @@ class Battle extends Component {
             <button class="attack4" onClick={this.player2SecondaryAttack}>{this.props.player2.actions[1].name}</button>
           </div>
         </ToggleDisplay>
+        {reset}
         <ToggleDisplay show={this.state.showGameOver}>
           <GameOver image={this.state.loser} />
         </ToggleDisplay>
