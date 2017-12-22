@@ -54,6 +54,8 @@ class Battle extends Component {
         this.handleAdd();
         this.state.turn = 2;
         return this.state.hp2 - this.randomAttack(this.state.strength1, level);
+    } else {
+      return this.state.hp2
     }
   }
 
@@ -62,6 +64,8 @@ class Battle extends Component {
       this.handleAdd();
       this.state.turn = 1;
       return this.state.hp1 - this.randomAttack(this.state.strength2, level);
+    } else {
+      return this.state.hp1
     }
   }
 
