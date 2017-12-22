@@ -78,12 +78,12 @@ constructor(props){
       return <p>Loading Players...</p>
     } else {
       const listOfPlayers = this.state.playerData.map( player => {
-        return <Player
+        return <div class="character"> <Player
           name = {player.name}
           image = {"http://localhost:4000" + player.image.url}
           click = {() => this.togglePlayerHandler(player)}
           key = {player.id}
-           />
+           /></div>
       });
 
       const PlayersChosen = [this.state.FirstPlayer, this.state.SecondPlayer]
@@ -91,6 +91,7 @@ constructor(props){
       const SelectedPlayers = PlayersChosen.map( player => {
 
         return <Player
+
           name = {player.name}
          image = {"http://localhost:4000" + player.image.url}
             hp =  {"Health: " + player.hp}

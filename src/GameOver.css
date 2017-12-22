@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers|Russo+One');
+
+*{
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+.moveimage{
+  position: absolute;
+  top: 35%;
+  left: 39%;
+}
+
+
+
+.button{
+  font-family: Bangers;
+  font-size: 35px;
+  color: yellow;
+  position: absolute;
+  left: 39%;
+  top: 76%;
+  width: 200px;
+  padding: 10px 20px;
+  outline: none;
+  border: 2px solid #fdea34;
+  background-color: #19717e;
+  box-shadow: 6px 8px #1f2226;
+}

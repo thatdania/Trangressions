@@ -10,16 +10,12 @@
 body {
   box-sizing: border-box;
   padding-bottom: 2cm;
-  background-color: rgb(113, 198, 240);
+  background-color: #d63232;
 }
-
-
 
 .player{
   border-radius: 20px;
 }
-
-
 
 .versus {
   font-family: Bangers;
@@ -28,42 +24,57 @@ body {
   width: 620px;
    height: 100px;
    position: fixed;
-   top: 82%;
+   top: 55%;
    left: 50%;
    margin-left: -310px;
    margin-top: -50px;
+   color: #19717e;
+   -webkit-text-stroke-width: 0.02px;
+   -webkit-text-stroke-color: #fdea34;
+   text-shadow: 2px 5px rgb(32, 30, 31);
 }
 
 .fight {
   font-family: Bangers;
   font-size: 35px;
+  color: yellow;
   position: absolute;
   left: 31%;
-  top: 83%;
+  top: 57%;
   width: 200px;
-  padding: 20px 40px;
+  padding: 10px 20px;
   outline: none;
+  border: 2px solid #fdea34;
+  background-color: #19717e;
+  box-shadow: 6px 8px #1f2226;
+
 }
 
 .fight:active{
-  transform: translateY(-0.3rem);
-  box-shadow: 0 5px 10px;
+  transform: translateY(0.3rem);
+  box-shadow: 0.3rem 0.3rem #1f2226;
 }
+
 
 .reset{
   font-family: Bangers;
   font-size: 35px;
+  color: yellow;
   position: absolute;
   left: 51%;
-  top: 83%;
+  top: 57%;
   width: 200px;
-  padding: 20px 40px;
+  padding: 10px 20px;
   outline: none;
+  border: 2px solid #fdea34;
+
+  background-color: #19717e;
+  box-shadow: -5px 8px #1f2226;
 }
 
 .reset:active{
-  transform: translateY(-0.3rem);
-  box-shadow: 0 5px 10px;
+  transform: translateY(0.3rem);
+  box-shadow: -0.2rem 0.3rem #1f2226;
 }
 
 .move{

@@ -3,11 +3,12 @@ import './Player.css'
 
 const Player = (props) => {
   return(
+
     <div className='playerSheet' onClick={props.click}>
     <p>{props.name}</p>
     <p> {props.hp} </p>
     <p> {props.strength} </p>
-    <img style={{width: 80, height: 80}} class="image" src={props.image}></img>
+    <img style={{width: 100, height: 100}} class="image" src={props.image}></img>
     </div>
   )
 }
