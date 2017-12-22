@@ -104,6 +104,7 @@ body {
   outline: none;
 }
 
+
 .attack1:active{
   transform: translateY(0.3rem);
   box-shadow: 0.2rem 0.3rem #1f2226;

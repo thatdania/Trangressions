@@ -54,10 +54,9 @@ class Battle extends Component {
         this.handleAdd();
         this.state.turn = 2;
         return this.state.hp2 - this.randomAttack(this.state.strength1, level);
-
-      } else {
-        return this.state.hp2
-      }
+    } else {
+      return this.state.hp2
+    }
   }
 
   attack2(level){

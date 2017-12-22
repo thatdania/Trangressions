@@ -1,18 +1,18 @@
 .playerSheet {
   display: float;
   float: left;
-  /*padding: 4px 8px;*/
+  padding: 4px 8px;
   width: 130px;
   margin: 16px;
   text-align: center;
   border: 4px solid #fdea34;
   background-color: #19717e;
   font-family: Bangers;
-}
+  color:
 
+}
 
 .image{
   -webkit-clip-path: circle(50% at 50% 50%);
   clip-path: circle(50% at 50% 50%);
-
 }
