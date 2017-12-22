@@ -23,8 +23,8 @@ body {
   text-align: center;
   width: 620px;
    height: 100px;
-   position: fixed;
-   top: 55%;
+   position: absolute;
+   top: 70%;
    left: 50%;
    margin-left: -310px;
    margin-top: -50px;
@@ -40,9 +40,10 @@ body {
   color: yellow;
   position: absolute;
   left: 31%;
-  top: 57%;
+  top: 100%;
   width: 200px;
   padding: 10px 20px;
+  margin-bottom: 1cm;
   outline: none;
   border: 2px solid #fdea34;
   background-color: #19717e;
@@ -62,7 +63,7 @@ body {
   color: yellow;
   position: absolute;
   left: 51%;
-  top: 57%;
+  top: 100%;
   width: 200px;
   padding: 10px 20px;
   outline: none;
@@ -80,4 +81,16 @@ body {
 .move{
   position: absolute;
   left: 30%;
+}
+
+.a{
+  position: absolute;
+  top: 26%;
+  left: 36%;
+}
+
+.character{
+  margin: 10px;
+  position: absolute;
+  top: 68%;
 }
