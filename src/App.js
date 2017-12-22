@@ -3,6 +3,7 @@ import './App.css';
 import Player from './Player/Player'
 import Battle from './Battle'
 import ToggleDisplay from 'react-toggle-display';
+import Sound from 'react-sound';
 
 class App extends Component {
 constructor(props){
@@ -102,8 +103,14 @@ constructor(props){
       });
 
       return (
+        <div >
+
+
         <ul>
           <ToggleDisplay show={this.state.show}>
+
+            <Sound url="sounds/menu.mp3" playStatus={Sound.status.PLAYING}/>
+
             {listOfPlayers} <br></br>
             {SelectedPlayers}<br></br>
             <div class="versus">
@@ -117,6 +124,7 @@ constructor(props){
           {this.state.showBattle ? <Battle player1={this.state.FirstPlayer}
                                   player2={this.state.SecondPlayer}/> : null}
         </ul>
+        </div>
       );
     }
   }

@@ -1,9 +1,9 @@
 import './App.css';
 import React, { Component } from 'react';
-import {CSSTransitionGroup} from 'react-transition-group';
 import './Battle.css'
 import { GameOver } from './GameOver'
 import ToggleDisplay from 'react-toggle-display';
+import Sound from 'react-sound';
 
 
 
@@ -52,7 +52,9 @@ class Battle extends Component {
   attack1(level){
       if( this.state.turn === 1){
         this.handleAdd();
-        this.state.turn = 2;
+        this.setState({
+          turn: 2
+        })
         return this.state.hp2 - this.randomAttack(this.state.strength1, level);
     }
   }
@@ -60,7 +62,9 @@ class Battle extends Component {
   attack2(level){
     if( this.state.turn === 2){
       this.handleAdd();
-      this.state.turn = 1;
+      this.setState({
+        turn: 1
+      })
       return this.state.hp1 - this.randomAttack(this.state.strength2, level);
     }
   }
