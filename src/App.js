@@ -25,7 +25,8 @@ constructor(props){
       image: {url: "/uploads/player/goggles.jpg"}
     },
     showBattle: false,
-    show: true
+    show: true,
+    showStats: false
   }
   this._onButtonClick=  this._onButtonClick.bind(this)
   this.reset = this.reset.bind(this)
@@ -83,6 +84,8 @@ constructor(props){
           image = {"http://localhost:4000" + player.image.url}
           click = {() => this.togglePlayerHandler(player)}
           key = {player.id}
+          hp = {player.hp}
+          strength = {player.strength}
            />
       });
 
@@ -94,8 +97,8 @@ constructor(props){
 
           name = {player.name}
          image = {"http://localhost:4000" + player.image.url}
-            hp =  {"Health: " + player.hp}
-      strength = {"Strength: " + player.strength}
+            hp =  {player.hp}
+      strength = {player.strength}
          showed = {player.hp}
            key = {player.id}
           />
