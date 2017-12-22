@@ -104,10 +104,13 @@ constructor(props){
       return (
         <ul>
           <ToggleDisplay show={this.state.show}>
+            <img class="title" src='images/Trangression.png' height="300px" width="500px"/>
+            <img class="star" src='images/stars.png' height="100px" width="100px"/>
+            <img class="star2" src='images/stars.png' height="50px" width="50px"/>
             <div class="character"> {listOfPlayers} </div><br></br>
             <div class="a"> {SelectedPlayers} </div><br></br>
             <div class="versus">
-            {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
+            {this.state.FirstPlayer.name + " vs " + this.state.SecondPlayer.name}
             </div>
             <br />
             <button class="fight" onClick={this._onButtonClick}> Fight </button>
