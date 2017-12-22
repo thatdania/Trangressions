@@ -94,6 +94,7 @@ constructor(props){
          image = {"http://localhost:4000" + player.image.url}
             hp =  {"Health: " + player.hp}
       strength = {"Strength: " + player.strength}
+         showed = {player.hp}
            key = {player.id}
           />;
       });
@@ -104,6 +105,7 @@ constructor(props){
             {listOfPlayers} <br></br>
             {SelectedPlayers}<br></br>
             {this.state.FirstPlayer.name + " Vs " + this.state.SecondPlayer.name}
+            <br />
             <button onClick={this._onButtonClick}> Fight </button>
             <button onClick={this.reset}> Reset </button>
           </ToggleDisplay>

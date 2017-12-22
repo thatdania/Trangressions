@@ -1,19 +1,24 @@
 import './App.css';
 import React, { Component } from 'react';
+import {CSSTransitionGroup} from 'react-transition-group';
+import './Battle.css'
 import { GameOver } from './GameOver'
 import ToggleDisplay from 'react-toggle-display';
 
-// import { Api } from './Api'
-// import Player from './Player/Player'
+
 
 class Battle extends Component {
   constructor(props){
     super(props);
     this.state = {
+      turn: 1,
       hp1: this.props.player1.hp,
       hp2: this.props.player2.hp,
       strength1: this.props.player1.strength,
       strength2: this.props.player2.strength,
+      crit1: (200 - this.props.player1.strength)*0.25,
+      crit2: (200 - this.props.player2.strength)*0.25,
+      items: [],
       showGameOver: false,
       show: true,
       image1: this.props.player1.image.url,
@@ -30,20 +35,34 @@ class Battle extends Component {
     this.player2Lose = this.player2Lose.bind(this);
   }
 
+  componentDidMount() {
+    fetch('http://localhost:4000/api/action_pictures/action_pictures.json')
+      .then(data => data.json())
+      .then(data=> {
+        this.setState({
+          picturesData: data
+        })
+      })
+  }
+
   randomAttack (strength, num) {
     return Math.floor(((Math.random() * 4) + num)*(strength/100))
   }
 
-  stop(hpLevel){
-   return hpLevel >= 0;
-  }
-
   attack1(level){
-    return this.state.hp2 - this.randomAttack(this.state.strength1, level);
+      if( this.state.turn === 1){
+        this.handleAdd();
+        this.state.turn = 2;
+        return this.state.hp2 - this.randomAttack(this.state.strength1, level);
+    }
   }
 
   attack2(level){
-    return this.state.hp1 - this.randomAttack(this.state.strength2, level);
+    if( this.state.turn === 2){
+      this.handleAdd();
+      this.state.turn = 1;
+      return this.state.hp1 - this.randomAttack(this.state.strength2, level);
+    }
   }
 
   player1Lose(){
@@ -55,27 +74,40 @@ class Battle extends Component {
   }
 
   player1PrimaryAttack() {
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp2 >= 12 ? this.setState({hp2: this.attack1(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player1SecondaryAttack() {
-    this.stop(this.state.hp2) ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp2 >= 12 ? this.setState({hp2: this.attack1(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player2Lose()});
   }
 
   player2PrimaryAttack() {
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp1 >= 12 ? this.setState({hp1: this.attack2(6)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
 
   player2SecondaryAttack() {
-    this.stop(this.state.hp1) ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
+    this.state.hp1 >= 12 ? this.setState({hp1: this.attack2(9)}) : this.setState({showGameOver: true, show: false})
     this.setState({loser: this.player1Lose()});
   }
 
+  handleAdd() {
+    const newItems = [this.state.picturesData[Math.floor(Math.random() * this.state.picturesData.length)]];
+    this.setState({items: newItems});
+  }
+
   render() {
-    return (
+    if(!this.state.picturesData){
+      return <p>Loading Battle...</p>
+    } else {
+
+      const picture = this.state.items.map((item) => (
+        <img src={"http://localhost:4000/" + item.image} key={item.id} height="100px" width="100px"/>
+      ));
+
+      return (
       <span>
         <ToggleDisplay show={this.state.show}>
           <div id='player1'>
@@ -86,6 +118,7 @@ class Battle extends Component {
             <button onClick={this.player1SecondaryAttack}>{this.props.player1.actions[1].name}</button>
           </div>
           <br />
+              {picture}
           <br />
           <div id='player2'>
             <p>{this.props.player2.name}</p>
@@ -101,6 +134,7 @@ class Battle extends Component {
       </span>
 
     );
+    }
   }
 }
 export default Battle;
