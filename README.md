@@ -1,13 +1,15 @@
 # Transgressions 🥊🎮
 
-PokeBattle is a re-incarneted 'Tekken' battle game based on the October coding Cohort at Makers Academy. PokeBattle was done with React as the front end, Rails as the back end, and the duration of this project was for a week. The project is called "Transgressions" based on a rule at Makers Academy.
+[How To Use](#how-to-use) | [Approach](#approach) | [Technologies](#technologies) | [Challenges](#challenges) | [MVP](#mvp) | [Other user stories](#other-user-stories) | [Team](#team)
+
+**Transgressions** is a re-incarneted 'Tekken' battle game based on the October coding Cohort at Makers Academy. This was done with React as the front end, Rails as the back end, and the duration of this project was for a week. The project is called "Transgressions" based on a rule at Makers Academy.
 
 My role in this project was supporting my pairs code both the front and back end. My main contribution was the appearance and UX design.
 Warning: This game is not responsive yet, it'll only be perfectly CSS'ED' on a MacBook Pro 13inch. 
 
 ![](public/images/home.png)
 
-## How To Use:
+# How To Use
 
 As this is the front-end of the project, it requires the api data from the other project linked here: https://github.com/LewisYoul/pokebattle
 Once you have this downloaded and running (instructions are on the linked repo, follow the steps below!)
@@ -34,21 +36,16 @@ npm start
 
 ~Enjoy!
 
-## Approach:
+# Approach
 
 Inspired by a Tekken Game and our cohort members at Makers Academy, we initially drew out an MVP to setup the basics of what made our
 game unique. From there, whilst working in pairs, we expanded into the other User stories we achieved (that is listed down below).
 
 ![](public/images/2.jpg)
 
-![](public/images/3.jpg)
+Here, we always had retros to write down the list of things to do for tomorrow and cherish the stuff that we did today. This is how the team stayed focused.
 
-![](public/images/4.jpg)
-
-Here, we always had retros to write down the list of things to do for tomorrow and cherish the stuff that we did today. This is how the team
-stayed focused.
-
-### Technologies
+# Technologies
 
 Front-End: React
  (Gems)
@@ -59,7 +56,7 @@ Back-End: Ruby On Rails
  - Responders
 
 
-### Challenges
+# Challenges
 
 | Successes             | Challenges                  |
 | --------------------- |:---------------------------:|
@@ -68,7 +65,7 @@ Back-End: Ruby On Rails
 | Had a good time       | Having an explorative approach |
 
 
-## MVP:
+# MVP:
 
 It was vital for us to create an MVP as we had to pinpoint what made our game unique. This was
 our starting point/goal for building the project.
@@ -91,7 +88,7 @@ So I can be start playing the battle game,
 I would like the attacked player to receive damage to their health bar  
 ```
 
-## Other User Stories (That were accomplished):
+## Other User Stories
 
 Throughout the week, we branched off into accomplishing the following user stories. Although we
 brainstormed many, these are the ones that were achieved during the week.
@@ -156,11 +153,11 @@ So I can play the game again,
 I would like to be redirected to the character page again!
 ```
 
-## Team Members:  
+# Team  
 
-- 🐿 Cristhian Da Silva (https://github.com/cristhiandas)
-- 🐱 Dania Mah (https://github.com/thatdania)
-- 🐸 Lewis Youl (https://github.com/LewisYoul)
-- 🐈 Marco Vanali (https://github.com/Vanals)
-- 🐻 Oleg Grushetskyy (https://github.com/olegfkl)
-- 🦅 Tabish Raza (https://github.com/tabrza)
+- 🐿 [Cristhian Da Silva](https://github.com/cristhiandas)
+- 🐱 [Dania Mah](https://github.com/thatdania)
+- 🐸 [Lewis Youl](https://github.com/LewisYoul)
+- 🐈 [Marco Vanali](https://github.com/Vanals)
+- 🐻 [Oleg Grushetskyy](https://github.com/olegfkl)
+- 🦅 [Tabish Raza](https://github.com/tabrza)
