@@ -35,16 +35,12 @@ npm install
 npm start
 ```
 
-~Enjoy!
-
 # Approach
 
 Inspired by a Tekken Game and our cohort members at Makers Academy, we initially drew out an MVP to setup the basics of what made our
-game unique. From there, whilst working in pairs, we expanded into the other User stories we achieved (that is listed down below).
+game unique. From there, whilst working in pairs, we expanded into the other User stories we achieved (that is listed down below).Here, we always had retros to write down the list of things to do for tomorrow and cherish the stuff that we did today. This is how the team stayed focused.
 
 ![](public/images/2.jpg)
-
-Here, we always had retros to write down the list of things to do for tomorrow and cherish the stuff that we did today. This is how the team stayed focused.
 
 # Technologies
 
@@ -56,7 +52,6 @@ Front-End: React
 Back-End: Ruby On Rails
  - Responders
 
-
 # Challenges
 
 | Successes             | Challenges                  |
@@ -64,7 +59,6 @@ Back-End: Ruby On Rails
 | Accomplished MVP      | Testing (Figuring out Jest) |
 | Delegated teamwork    | Learning React in a short period of time         |
 | Had a good time       | Having an explorative approach |
-
 
 # MVP:
 
