@@ -1,4 +1,6 @@
-# Transgressions 🥊🎮
+<h1 align="center">
+  Transgressions 🥊🎮
+</h1>
 
 [How To Use](#how-to-use) | [Approach](#approach) | [Technologies](#technologies) | [Challenges](#challenges) | [MVP](#mvp) | [Other user stories](#other-user-stories) | [Team](#team)
 
@@ -9,6 +11,7 @@
 My role in this project was supporting my pairs code both the front and back end. My main contribution was the appearance and UX design.
 Warning: This game is not responsive yet, it'll only be perfectly CSS'ED' on a MacBook Pro 13inch. 
 
+***
 
 # How To Use
 
@@ -34,13 +37,16 @@ npm install
 ```
 npm start
 ```
+***
 
 # Approach
+
+![](public/images/2.jpg)
 
 Inspired by a Tekken Game and our cohort members at Makers Academy, we initially drew out an MVP to setup the basics of what made our
 game unique. From there, whilst working in pairs, we expanded into the other User stories we achieved (that is listed down below).Here, we always had retros to write down the list of things to do for tomorrow and cherish the stuff that we did today. This is how the team stayed focused.
 
-![](public/images/2.jpg)
+***
 
 # Technologies
 
@@ -51,6 +57,8 @@ Front-End: React
 
 Back-End: Ruby On Rails
  - Responders
+ 
+ ***
 
 # Challenges
 
@@ -147,6 +155,7 @@ As a user,
 So I can play the game again,
 I would like to be redirected to the character page again!
 ```
+***
 
 # Team  
 
